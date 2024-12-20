@@ -1,0 +1,33 @@
+.news {
+  border-bottom: .5px solid grey;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.time-update {
+  color: grey;
+}
+
+.img-post {
+  max-width: 500px;
+  height: 333px;
+  overflow: hidden;
+  aspect-ratio: 500/333;
+}
+
+.badge {
+  cursor: pointer;
+}
+
+#star {
+  width: 55px;
+}
+
+label[for='content'] {
+  width: 80px;
+}
+
+.send-cmt button {
+  height: 37px;
+  width: 110px;
+}

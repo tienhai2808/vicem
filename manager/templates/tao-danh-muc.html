@@ -1,0 +1,14 @@
+{% extends 'quan-ly.html' %}
+
+{% block content %}
+<h1 class="text-center mt-2">Tạo danh mục</h1>
+<div class="container d-flex justify-content-center">
+  <form method="post" class="w-75" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <center>
+      <button class="btn btn-warning mt-3">Tạo danh mục</button>
+    </center>
+  </form>
+</div>
+{% endblock %}

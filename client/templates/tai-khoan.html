@@ -1,0 +1,43 @@
+{% extends 'trang-chu.html' %}
+{% load static %}
+
+{% block title %}
+Tài khoản của bạn
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/tai-khoan.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3 class="text-center mt-2">Xin chào {{ user.first_name }} {{ user.last_name }}</h3>
+  <hr>
+  <div class="row w-100">
+    <div class="col-2 border-end">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/tai-khoan/' %} active {% endif %}" href="/tai-khoan/">Thông tin tài khoản</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/tai-khoan/sua-thong-tin/' %} active {% endif %}" href="/tai-khoan/sua-thong-tin/">Sửa thông tin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/tai-khoan/yeu-thich/' %} active {% endif %}" href="/tai-khoan/yeu-thich/">Bài viết yêu thích</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-10 ps-5 div-info border-start">
+      <div>Họ tên: {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}{% else %}Chưa cập nhật{% endif %}</div>
+      <div>Email : {% if user.email %}{{ user.email }}{% else %}Chưa cập nhật{% endif %}</div>
+      <div>Số điện thoại: {% if user.hoso.dien_thoai %}{{ user.hoso.dien_thoai }}{% else %}Chưa cập nhật{% endif %}</div>
+      <div>Ngày sinh: {% if user.hoso.ngay_sinh %}{{ user.hoso.ngay_sinh }}{% else %}Chưa cập nhật{% endif %}</div>
+      <div>Giới tính: {{ user.hoso.gioi_tinh }}</div>
+      {% if user.hoso.vai_tro %}
+      <div>Vai trò: {{ user.hoso.vai_tro }}</div>
+      <a href="/quan-ly-bai-viet/" class="post-management"><i>Trung tâm xử lý bài viết</i> <i class="fa-solid fa-angles-right fa-fade"></i></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

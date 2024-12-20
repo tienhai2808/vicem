@@ -1,0 +1,61 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/danh-muc.css' %}">
+{% endblock %}
+
+{% block title %}
+Quản lý danh mục bài viết
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Danh mục bài viết</h1>
+<div class="container position-relative">
+  <div class="d-flex justify-content-end mt-2 mb-2">
+    <button class="btn btn-warning btn-create">Tạo danh mục</button>
+  </div>
+  <table class="table table-bordered">
+    <thead class="table-warning">
+      <tr>
+        <th scope="col">ID danh mục</th>
+        <th scope="col">Tên danh mục</th>
+        <th scope="col">Slug danh mục</th>
+        <th scope="col">Xóa danh mục</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dm in danh_mucs %}
+      <tr>
+        <th scope="row">{{ dm.id }}</th>
+        <td>
+          <a href="/quan-ly-bai-viet/danh-muc/{{ dm.id }}/">{{ dm.ten }}</a>
+        </td>
+        <td>{{ dm.slug }}</td>
+        <td><span class="badge text-bg-danger" id="{{ dm.id }}">Xóa</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <form class="form-delete" method="post">
+    {% csrf_token %}
+    <input hidden name="id_delete" type="text">
+  </form>
+  <div class="position-absolute w-50 bg-light border d-none border-2 border-warning px-5 py-3 form-create">
+    <div class="d-flex justify-content-end mb-1">
+      <i class="fa-solid fa-xmark text-warning"></i>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <button class="btn btn-warning">Tạo</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/danh-muc.js' %}"></script>
+{% endblock %}

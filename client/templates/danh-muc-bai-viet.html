@@ -1,0 +1,25 @@
+{% extends 'trang-chu.html' %}
+{% load static %}
+
+{% block title %}
+{{ danh_muc.ten }}
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/bai-viet-client.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="news"><i class="fa-solid fa-caret-right"></i> {{ danh_muc.ten }}</div>
+{% for bv in bai_viets %}
+<div class="div-post">
+  <div class="img-post w-25">
+    <img src="{{ bv.hinh_anh.url }}" alt="Ảnh bài viết" class="img-thumbnail object-fit-cover h-100 w-100">
+  </div>
+  <div class="mt-3 w-75">
+    <a class="title-post" href="/bai-viet/{{ bv.slug }}">{{ bv.tieu_de }}</a> <br>
+    <a class="topic-post" href="/{{ bv.danh_muc.slug }}">{{ bv.danh_muc }}</a>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,26 @@
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.alert-warning {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-alert {
+  cursor: pointer;
+}
+
+.navbar {
+  padding-left: 150px !important;
+  padding-right: 150px !important;
+}
+
+main {
+  min-height: 80vh;
+}
+
+footer {
+  padding: 10px 150px;
+}

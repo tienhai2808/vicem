@@ -1,0 +1,49 @@
+.btn-account {
+  background-color: #c49d6b !important;
+  color: #ffffff !important;
+}
+
+.form-account input {
+  margin-bottom: 7px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+
+.active {
+  background-color: #c49d6b !important;
+}
+
+.div-info div {
+  margin-bottom: 3px;
+}
+
+.div-post {
+  display: flex;
+  gap: 20px;
+}
+
+.img-post {
+  max-width: 150px;
+  height: auto;
+  overflow: hidden;
+  aspect-ratio: 800/533;
+}
+
+.img-post img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.title-post {
+  text-decoration: none;
+  color: black !important;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.post-management {
+  color: black !important;
+  text-decoration: underline;
+}

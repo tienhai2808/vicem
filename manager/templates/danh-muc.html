@@ -1,0 +1,18 @@
+{% extends 'quan-ly.html' %}
+
+{% block title %}
+Danh mục {{ danh_muc.ten }}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Thông tin danh mục</h1>
+<div class="container">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <center>
+      <button class="btn btn-warning my-3">Lưu chỉnh sửa</button>
+    </center>
+  </form>
+</div>
+{% endblock %}

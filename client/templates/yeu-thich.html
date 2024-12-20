@@ -1,0 +1,48 @@
+{% extends 'trang-chu.html' %}
+{% load static %}
+
+{% block title %}
+Tài khoản của bạn
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/tai-khoan.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container pb-5">
+  <h3 class="text-center mt-2">Xin chào {{ user.first_name }} {{ user.last_name }}</h3>
+  <hr>
+  <div class="row">
+    <div class="col-2 border-end">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/tai-khoan/' %} active {% endif %}" href="/tai-khoan/">Thông tin tài khoản</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/tai-khoan/sua-thong-tin/' %} active {% endif %}" href="/tai-khoan/sua-thong-tin/">Sửa thông tin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/tai-khoan/yeu-thich/' %} active {% endif %}" href="/tai-khoan/yeu-thich/">Bài viết yêu thích</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-10 px-5 div-info border-start">
+      {% if bai_viets %}
+      {% for bv in bai_viets%}
+      <div class="div-post mb-3">
+        <div class="img-post">
+          <img src="{{ bv.hinh_anh.url }}" alt="Ảnh bài viết">
+        </div>
+        <div>
+          <a href="/bai-viet/{{ bv.slug }}" class="title-post">{{ bv.tieu_de }}</a>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      Chưa có lịch sử yêu thích
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

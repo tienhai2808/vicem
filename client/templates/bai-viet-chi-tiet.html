@@ -1,0 +1,78 @@
+{% extends 'trang-chu.html' %}
+{% load static %}
+
+{% block title %}
+{{ bai_viet.tieu_de }}
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/bai-viet-chi-tiet.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="news"><i class="fa-solid fa-caret-right"></i> {{ bai_viet.danh_muc.ten }}</div>
+<h3 class="mt-2">{{ bai_viet.tieu_de }}</h3>
+<div class="time-update">Cập nhật: {{ bai_viet.thoi_gian_dang|date:"H:i | d/m/Y" }}</div>
+<div class="mt-2">
+  <span class="badge text-bg-primary btn-like">
+    {% if not bai_viet.da_thich %}
+    <i class="fa-solid fa-thumbs-up"></i>
+    {% else %}
+    <i class="fa-solid fa-check"></i>
+    {% endif %}
+    Thích
+  </span>
+  <span class="badge text-bg-primary btn-share"><i class="fa-solid fa-share"></i> Chia sẻ</span>
+  <form method="post" class="form-like">
+    {% csrf_token %}
+    <input hidden type="text" name="action" value="{% if bai_viet.da_thich %}cancel_like{% else %}like{% endif %}">
+  </form>
+</div>
+<br>
+<div class="img-post">
+  <img src="{{ bai_viet.hinh_anh.url }}" alt="Ảnh bài viết" class="object-fit-cover h-100 w-100">
+</div>
+<div class="content-post mt-3">
+  {{ bai_viet.noi_dung|linebreaksbr }}
+</div>
+<br><br>
+<div class="cmt-post">
+  <div class="send-cmt">
+    <h5 class="mb-2">Gửi ý kiến của bạn</h5>
+    <form method="post">
+      {% csrf_token %}
+      <div class="d-flex gap-2 mb-2">
+        <label for="star">Sao</label>
+        <input type="number" class="form-control" name="so_sao" id="star" value="5" max="5" min="1">
+      </div>
+      <div class="d-flex gap-2">
+        <label for="content">Nội dung</label>
+        <textarea name="noi_dung" class="form-control" id="content"></textarea>
+        <button class="btn btn-primary">Bình luận</button>
+      </div>
+    </form>
+  </div>
+  {% if binh_luans %}
+  <div class="old-cmt mt-5">
+    <h5 class="mb-2">Các ý kiến đã đóng góp</h5>
+    {% for bl in binh_luans %}
+    <div class="mb-2">
+      <div class="d-flex gap-2">
+        <div>{{ bl.thoi_gian|date:"H:i, d/m/Y" }}</div>
+        <div><strong>{{ bl.nguoi_dung.username }}</strong></div>
+      </div>
+      <div>
+        <div style="font-size: 20px;"><strong>{{ bl.so_sao }}★</strong></div>
+        <div>{{ bl.noi_dung }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+<br><br>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/bai-viet-chi-tiet.js' %}"></script>
+{% endblock %}

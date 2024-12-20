@@ -1,0 +1,32 @@
+{% extends 'trang-chu.html' %}
+{% load static %}
+
+{% block title %}
+Đăng ký
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/tai-khoan.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2 mb-4">Đăng ký</h1>
+<div class="container">
+  <center>
+    <form method="post" class="form-account">
+      {% csrf_token %}
+      <label for="username">Tên đăng nhập:</label>
+      <input id="username" name="username" type="text"> 
+      <br>
+      <label for="password1">Mật khẩu:</label>
+      <input type="password" id="password1" name="password1">
+      <br>
+      <label for="password2">Nhập lại mật khẩu:</label>
+      <input type="password" name="password2" id="password2">
+      <br>
+      <br>
+      <button class="btn btn-account">Đăng ký</button>
+    </form>
+  </center>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/bai-viet-manager.css' %}">
+{% endblock %}
+
+{% block title %}
+Tạo mới bài viết
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Tạo bài viết</h1>
+<div class="container">
+  <form method="post" class="form-post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <center>
+      <button class="btn btn-warning my-3">Tạo bài viết</button>
+    </center>
+  </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/bai-viet.js' %}"></script>
+{% endblock %}

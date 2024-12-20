@@ -1,0 +1,67 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/da-dang.css' %}">
+{% endblock %}
+
+{% block title %}
+Bài viết đã đăng
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Bài viết đã đăng</h1>
+<div class="container position-relative">
+  <table class="table table-bordered">
+    <thead class="table-warning">
+      <tr>
+        <th scope="col">Ngày tạo</th>
+        <th scope="col">Tiêu đề</th>
+        <th scope="col">Danh mục</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Khung giờ hiện</th>
+        <th scope="col">Khung giờ ẩn</th>
+        <th scope="col">Gỡ bài</th>
+        <th scope="col">Xóa bài</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bv in bai_viets %}
+      <tr>
+        <th scope="row">{{ bv.ngay_tao|date:"d/m/Y" }}</th>
+        <td>
+          <a href="/bai-viet/{{ bv.slug }}">{{ bv.tieu_de }}</a>
+        </td>
+        <td>{{ bv.danh_muc }}</td>
+        <td>{{ bv.trang_thai }}</td>
+        <td>
+          {% if bv.khung_gio_hien %}
+          {{ bv.khung_gio_hien|date:"H:i" }}
+          {% else %}
+          Mọi khung giờ
+          {% endif %}
+        </td>
+        <td>
+          {% if bv.khung_gio_an %}
+          {{ bv.khung_gio_an|date:"H:i" }}
+          {% else %}
+          Mọi khung giờ
+          {% endif %}
+        </td>
+        <td><span class="badge text-bg-warning btn-remove" value="{{ bv.id }}">Gỡ</span></td>
+        <td><span class="badge text-bg-danger btn-delete" value="{{ bv.id }}">Xóa</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <form class="form-action" method="post">
+    {% csrf_token %}
+    <input hidden name="id_post" type="text">
+    <input hidden name="action" type="text">
+  </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/da-dang.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/cho-dang.css' %}">
+{% endblock %}
+
+{% block title %}
+Bài viết chờ đăng
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Bài viết chờ đăng</h1>
+<div class="container position-relative">
+  <table class="table table-bordered">
+    <thead class="table-warning">
+      <tr>
+        <th scope="col">Ngày tạo</th>
+        <th scope="col">Người tạo</th>
+        <th scope="col">Tiêu đề</th>
+        <th scope="col">Danh mục</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Đăng bài</th>
+        <th scope="col">Xóa bài</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bv in bai_viets %}
+      <tr>
+        <th scope="row">{{ bv.ngay_tao|date:"d/m/Y" }}</th>
+        <td>{{ bv.nguoi_tao.first_name }} {{ bv.nguoi_tao.last_name }}</td>
+        <td>
+          <a href="/quan-ly-bai-viet/{{ bv.slug }}">{{ bv.tieu_de }}</a>
+        </td>
+        <td>{{ bv.danh_muc }}</td>
+        <td>{{ bv.trang_thai }}</td>
+        <td><span class="badge text-bg-success btn-post" value="{{ bv.id }}">Đăng</span></td>
+        <td><span class="badge text-bg-danger btn-delete" value="{{ bv.id }}">Xóa</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="position-absolute w-50 bg-light d-none border border-2 border-warning px-5 py-3 form-time">
+    <div class="d-flex justify-content-end mb-1">
+      <i class="fa-solid fa-xmark text-warning"></i>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <p>
+        <label for="start_time">Thời gian hiện</label> <br>
+        <input type="time" name="start_time" id="start_time" class="form-control">
+      </p>
+      <p>
+        <label for="end_time">Thời gian ẩn</label> <br>
+        <input type="time" name="end_time" id="end_time" class="form-control">
+      </p>
+      <input hidden type="text" id="id_post" name="id_post">
+      <input hidden type="text" id="action" name="action">
+      <center>
+        <button class="btn btn-warning" type="button">Đăng</button>
+      </center>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/cho-dang.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/bai-viet-manager.css' %}">
+{% endblock %}
+
+{% block title %}
+Các bài viết của bạn
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Bài viết của bạn</h1>
+<div class="container">
+  <table class="table table-bordered">
+    <thead class="table-warning">
+      <tr>
+        <th scope="col">Ngày tạo</th>
+        <th scope="col">Tiêu đề</th>
+        <th scope="col">Danh mục</th>
+        <th scope="col">Trạng thái</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bv in bai_viets %}
+      <tr>
+        <th scope="row">{{ bv.ngay_tao|date:"d/m/Y" }}</th>
+        <td>
+          {% if bv.trang_thai == 'Chờ đăng' %}
+          <a href="/quan-ly-bai-viet/{{ bv.slug }}">{{ bv.tieu_de }}</a>
+          {% else %}
+          <a href="/bai-viet/{{ bv.slug }}">{{ bv.tieu_de }}</a>
+          {% endif %}
+        </td>
+        <td>{{ bv.danh_muc }}</td>
+        <td>{{ bv.trang_thai }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/bai-viet.js' %}"></script>
+{% endblock %}

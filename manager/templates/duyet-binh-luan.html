@@ -1,0 +1,49 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block title %}
+Bình luận chờ duyệt
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Bình luận chờ duyệt</h1>
+<div class="container position-relative">
+  <table class="table table-bordered">
+    <thead class="table-warning">
+      <tr>
+        <th scope="col">Thời gian</th>
+        <th scope="col">Người tạo</th>
+        <th scope="col">Bài viết</th>
+        <th scope="col">Số sao</th>
+        <th scope="col">Nội dung</th>
+        <th scope="col">Duyệt</th>
+        <th scope="col">Xóa</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bl in binh_luans %}
+      <tr>
+        <th scope="row">{{ bl.thoi_gian|date:"H:i, d/m/Y" }}</th>
+        <td>{{ bl.nguoi_dung.username }}</td>
+        <td>
+          <a href="/bai-viet/{{ bl.bai_viet.slug }}">{{ bl.bai_viet.tieu_de }}</a>
+        </td>
+        <td>{{ bl.so_sao }}</td>
+        <td>{{ bl.noi_dung }}</td>
+        <td><span class="badge text-bg-success btn-confirm" style="cursor: pointer;" value="{{ bl.id }}">Duyệt</span></td>
+        <td><span class="badge text-bg-danger btn-delete" style="cursor: pointer;" value="{{ bl.id }}">Xóa</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <form class="form-action" method="post">
+    {% csrf_token %}
+    <input hidden name="id_cmt" type="text">
+    <input hidden name="action" type="text">
+  </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/duyet-binh-luan.js' %}"></script>
+{% endblock %}

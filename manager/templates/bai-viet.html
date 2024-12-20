@@ -1,0 +1,51 @@
+{% extends 'quan-ly.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'style/bai-viet-manager.css' %}">
+{% endblock %}
+
+{% block title %}
+Bản nháp | {{ bai_viet.tieu_de }}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-2">Thông tin bài viết</h1>
+<div class="container">
+  <form method="post" class="form-post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="d-flex justify-content-center">
+      <div class="row w-100">
+        <div class="col-8">
+          <p>
+            {{ form.tieu_de.label_tag }}
+            {{ form.tieu_de }}
+          </p>
+          <p>
+            {{ form.danh_muc.label_tag }}
+            {{ form.danh_muc }}
+          </p>
+          <p>
+            {{ form.hinh_anh.label_tag }}
+            {{ form.hinh_anh }}
+          </p>
+        </div>
+        <div class="col-4">
+          <img src="{{ bai_viet.hinh_anh.url }}" alt="Ảnh bài viết" class="w-100 border border-warning">
+        </div>
+      </div>
+    </div>
+    <p>
+      {{ form.noi_dung.label_tag }}
+      {{ form.noi_dung }}
+    </p>
+    <center>
+      <button class="btn btn-warning my-3">Lưu chỉnh sửa</button>
+    </center>
+  </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'script/bai-viet.js' %}"></script>
+{% endblock %}

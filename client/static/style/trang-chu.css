@@ -1,0 +1,37 @@
+.news {
+  border-bottom: .5px solid grey;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.div-post {
+  margin: 20px 0;
+  border-bottom: .5px solid grey;
+  padding-bottom: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.img-thumbnail {
+  width: 200px !important;
+}
+
+.title-post {
+  text-decoration: none;
+  color: black !important;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.topic-post {
+  text-decoration: none;
+  color: grey;
+  font-size: 14px;
+}
+
+.img-post {
+  max-width: 200px;
+  height: auto;
+  overflow: hidden;
+  aspect-ratio: 800/533;
+}
